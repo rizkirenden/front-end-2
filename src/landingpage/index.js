@@ -17,11 +17,9 @@ function Index() {
   const [newRelease, setNewRelease] = useState([]);
 
   useEffect(() => {
-    // Check admin status from localStorage
     const adminStatus = localStorage.getItem("isAdmin") === "true";
     setIsAdmin(adminStatus);
 
-    // Load movie data from localStorage
     const savedMovies = JSON.parse(localStorage.getItem("movieData"));
     if (savedMovies) {
       setTopRating(savedMovies.topRating || []);
@@ -73,8 +71,6 @@ function Index() {
         onToggleMute={() => setIsMuted(!isMuted)}
         bgExtended={true}
       />
-
-      {/* Continue Watching Section */}
       <section className="py-10 px-4 sm:px-8 md:px-16 lg:px-32 bg-[#181A1C]">
         <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-8 text-left">
           Melanjutkan Nonton Film
@@ -89,8 +85,6 @@ function Index() {
           />
         </div>
       </section>
-
-      {/* Other Card Sections */}
       <section className="py-6 sm:py-10 px-4 sm:px-8 md:px-16 lg:px-32 bg-[#181A1C]">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white">

@@ -46,17 +46,16 @@ const MovieAdmin = () => {
   };
 
   const handleImageChange = (name, value) => {
-    // Handle dynamic image width and height
     const img = new Image();
     img.onload = () => {
       setFormData({
         ...formData,
         [name]: value,
-        imageWidth: img.width ? `${img.width}px` : "250px", // Default width if no image
-        imageHeight: img.height ? `${img.height}px` : "400px", // Default height if no image
+        imageWidth: img.width ? `${img.width}px` : "250px",
+        imageHeight: img.height ? `${img.height}px` : "400px",
       });
     };
-    img.src = value; // Set the image URL
+    img.src = value;
   };
 
   const handleSubmit = (e) => {
@@ -139,8 +138,6 @@ const MovieAdmin = () => {
           </button>
           <h1 className="text-2xl font-bold">Movie Management</h1>
         </div>
-
-        {/* Tab Navigation */}
         <div className="flex border-b mb-6">
           <button
             className={`py-2 px-4 font-medium ${
@@ -173,8 +170,6 @@ const MovieAdmin = () => {
             New Release
           </button>
         </div>
-
-        {/* Movie Table */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2">
             <div className="bg-gray-50 rounded-lg p-4">
@@ -236,39 +231,22 @@ const MovieAdmin = () => {
             </div>
           </div>
 
-          {/* Movie Form */}
           <div className="lg:col-span-1">
             <div className="bg-gray-50 rounded-lg p-4">
               <h2 className="text-xl font-semibold mb-4">
                 {editingId ? "Edit Movie" : "Add New Movie"}
               </h2>
               <form onSubmit={handleSubmit}>
-                <div className="mb-4">
-                  <label className="block text-gray-700 mb-2">Title</label>
-                  <input
-                    type="text"
-                    name="title"
-                    value={formData.title}
-                    onChange={handleInputChange}
-                    className="w-full px-3 py-2 border rounded"
-                  />
-                </div>
-
-                {/* Image selector */}
                 <ImageSelector
                   value={formData.image}
                   onChange={(value) => handleImageChange("image", value)}
                   label="Image URL"
                 />
-
-                {/* Hover image selector */}
                 <ImageSelector
                   value={formData.hoverImage}
                   onChange={(value) => handleImageChange("hoverImage", value)}
                   label="Hover Image URL"
                 />
-
-                {/* Alt Text */}
                 <div className="mb-4">
                   <label className="block text-gray-700 mb-2">Alt Text</label>
                   <input
@@ -279,8 +257,6 @@ const MovieAdmin = () => {
                     className="w-full px-3 py-2 border rounded"
                   />
                 </div>
-
-                {/* Age Rating */}
                 <div className="mb-4">
                   <label className="block text-gray-700 mb-2">Age Rating</label>
                   <input
@@ -291,8 +267,6 @@ const MovieAdmin = () => {
                     className="w-full px-3 py-2 border rounded"
                   />
                 </div>
-
-                {/* Duration */}
                 <div className="mb-4">
                   <label className="block text-gray-700 mb-2">Duration</label>
                   <input
@@ -303,8 +277,6 @@ const MovieAdmin = () => {
                     className="w-full px-3 py-2 border rounded"
                   />
                 </div>
-
-                {/* Genre */}
                 <div className="mb-4">
                   <label className="block text-gray-700 mb-2">Genre</label>
                   <input
@@ -315,8 +287,6 @@ const MovieAdmin = () => {
                     className="w-full px-3 py-2 border rounded"
                   />
                 </div>
-
-                {/* New Episode Checkbox */}
                 <div className="mb-4 flex items-center">
                   <input
                     type="checkbox"
@@ -327,8 +297,6 @@ const MovieAdmin = () => {
                   />
                   <label className="text-gray-700">New Episode</label>
                 </div>
-
-                {/* Top 10 Checkbox */}
                 <div className="mb-4 flex items-center">
                   <input
                     type="checkbox"
@@ -339,8 +307,6 @@ const MovieAdmin = () => {
                   />
                   <label className="text-gray-700">Top 10</label>
                 </div>
-
-                {/* Submit Button */}
                 <button
                   type="submit"
                   className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 flex items-center"
@@ -355,8 +321,6 @@ const MovieAdmin = () => {
                     </>
                   )}
                 </button>
-
-                {/* Cancel Button for Editing */}
                 {editingId && (
                   <button
                     type="button"
