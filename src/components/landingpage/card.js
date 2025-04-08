@@ -67,7 +67,7 @@ const Card = ({
 
   const getTransformScale = () => {
     if (isContinueWatching) return 1.05;
-    return isMobile ? 1.15 : 1.35;
+    return isMobile ? 1.15 : 1.1;
   };
 
   const getTransformOrigin = () => {
