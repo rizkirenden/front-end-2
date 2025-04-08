@@ -15,18 +15,54 @@ function Index() {
   const [topRating, setTopRating] = useState([]);
   const [trending, setTrending] = useState([]);
   const [newRelease, setNewRelease] = useState([]);
+  const [daftarSaya, setDaftarSaya] = useState([]);
 
   useEffect(() => {
     const adminStatus = localStorage.getItem("isAdmin") === "true";
     setIsAdmin(adminStatus);
 
     const savedMovies = JSON.parse(localStorage.getItem("movieData"));
+    const savedDaftarSaya =
+      JSON.parse(localStorage.getItem("daftarSaya")) || [];
+
     if (savedMovies) {
       setTopRating(savedMovies.topRating || []);
       setTrending(savedMovies.trending || []);
       setNewRelease(savedMovies.newRelease || []);
     }
+    setDaftarSaya(savedDaftarSaya);
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem("daftarSaya", JSON.stringify(daftarSaya));
+  }, [daftarSaya]);
+
+  const handleAddToDaftarSaya = (card) => {
+    const isAlreadyAdded = daftarSaya.some((item) => item.id === card.id);
+
+    if (!isAlreadyAdded) {
+      const newDaftarSaya = [
+        ...daftarSaya,
+        {
+          id: card.id,
+          title: card.title,
+          image: card.image,
+          hoverImage: card.hoverImage,
+          rating: card.rating,
+          ageRating: card.ageRating,
+          duration: card.duration,
+          genre: card.genre,
+          // Tambahkan properti lain yang diperlukan
+        },
+      ];
+
+      setDaftarSaya(newDaftarSaya);
+      localStorage.setItem("daftarSaya", JSON.stringify(newDaftarSaya));
+      alert(`${card.title} telah ditambahkan ke Daftar Saya`);
+    } else {
+      alert(`${card.title} sudah ada di Daftar Saya`);
+    }
+  };
 
   return (
     <div className="flex flex-col min-h-screen bg-[#181A1C]">
@@ -71,6 +107,7 @@ function Index() {
         onToggleMute={() => setIsMuted(!isMuted)}
         bgExtended={true}
       />
+
       <section className="py-10 px-4 sm:px-8 md:px-16 lg:px-32 bg-[#181A1C]">
         <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-8 text-left">
           Melanjutkan Nonton Film
@@ -82,9 +119,11 @@ function Index() {
             isContinueWatching={true}
             initialVisibleCards={4}
             visibleCards={5}
+            onAddToDaftarSaya={handleAddToDaftarSaya}
           />
         </div>
       </section>
+
       <section className="py-6 sm:py-10 px-4 sm:px-8 md:px-16 lg:px-32 bg-[#181A1C]">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white">
@@ -106,6 +145,7 @@ function Index() {
             showArrows={true}
             showBadges={true}
             imageHeight="400px"
+            onAddToDaftarSaya={handleAddToDaftarSaya}
           />
         </div>
       </section>
@@ -131,6 +171,7 @@ function Index() {
             showArrows={true}
             showBadges={true}
             imageHeight="400px"
+            onAddToDaftarSaya={handleAddToDaftarSaya}
           />
         </div>
       </section>
@@ -156,6 +197,7 @@ function Index() {
             showArrows={true}
             showBadges={true}
             imageHeight="400px"
+            onAddToDaftarSaya={handleAddToDaftarSaya}
           />
         </div>
       </section>

@@ -36,7 +36,8 @@ import img31 from "../assets/Type=24.png";
 import img32 from "../assets/Type=30.png";
 import img33 from "../assets/Type=22.png";
 import img34 from "../assets/image 227.png";
-
+import img35 from "../assets/Number=17.png";
+import img36 from "../assets/Type=1.png";
 const availableImages = [
   img1,
   img2,
@@ -72,6 +73,8 @@ const availableImages = [
   img32,
   img33,
   img34,
+  img35,
+  img36,
 ];
 
 const ImageSelector = ({ value, onChange, label }) => {

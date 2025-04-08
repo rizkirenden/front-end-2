@@ -7,6 +7,7 @@ import {
   FaPlay,
   FaCheck,
   FaChevronDown,
+  FaTimes,
 } from "react-icons/fa";
 
 const CARD_STYLES = {
@@ -20,6 +21,8 @@ const CARD_STYLES = {
   progressFill: "h-full bg-[#0F8FF3] rounded-full",
   actionButton:
     "bg-white text-black rounded-full p-1 sm:p-2 hover:bg-opacity-90",
+  removeButton:
+    "bg-red-500 text-white rounded-full p-1 sm:p-2 hover:bg-opacity-90",
 };
 
 const Card = ({
@@ -44,6 +47,10 @@ const Card = ({
   progress = 0,
   timeRemaining = "2h 13m",
   position = "middle",
+  onAddToDaftarSaya,
+  onRemoveFromDaftarSaya,
+  isDaftarSaya = false,
+  id,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [naturalAspectRatio, setNaturalAspectRatio] = useState(16 / 9);
@@ -184,9 +191,37 @@ const Card = ({
               <button className={CARD_STYLES.actionButton}>
                 <FaPlay className="text-xs sm:text-sm" />
               </button>
-              <button className={CARD_STYLES.actionButton}>
-                <FaCheck className="text-xs sm:text-sm" />
-              </button>
+              {isDaftarSaya ? (
+                <button
+                  className={CARD_STYLES.removeButton}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onRemoveFromDaftarSaya && onRemoveFromDaftarSaya(id);
+                  }}
+                >
+                  <FaTimes className="text-xs sm:text-sm" />
+                </button>
+              ) : (
+                <button
+                  className={CARD_STYLES.actionButton}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onAddToDaftarSaya &&
+                      onAddToDaftarSaya({
+                        id,
+                        title,
+                        image,
+                        hoverImage,
+                        rating,
+                        ageRating,
+                        duration,
+                        genre,
+                      });
+                  }}
+                >
+                  <FaCheck className="text-xs sm:text-sm" />
+                </button>
+              )}
             </div>
             <button className={CARD_STYLES.actionButton}>
               <FaChevronDown className="text-xs sm:text-sm" />
@@ -233,6 +268,9 @@ const CardSlider = ({
   visibleCards = 5,
   isContinueWatching = false,
   initialVisibleCards = null,
+  onAddToDaftarSaya,
+  onRemoveFromDaftarSaya,
+  isDaftarSaya = false,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [cardWidth, setCardWidth] = useState(0);
@@ -402,6 +440,9 @@ const CardSlider = ({
                 position={
                   index === 0 ? "left" : isLastCard ? "right" : "middle"
                 }
+                onAddToDaftarSaya={onAddToDaftarSaya}
+                onRemoveFromDaftarSaya={onRemoveFromDaftarSaya}
+                isDaftarSaya={isDaftarSaya}
               />
             </div>
           );
@@ -478,6 +519,10 @@ Card.propTypes = {
   progress: PropTypes.number,
   timeRemaining: PropTypes.string,
   position: PropTypes.oneOf(["left", "middle", "right"]),
+  onAddToDaftarSaya: PropTypes.func,
+  onRemoveFromDaftarSaya: PropTypes.func,
+  isDaftarSaya: PropTypes.bool,
+  id: PropTypes.string,
 };
 
 CardSlider.propTypes = {
@@ -490,6 +535,9 @@ CardSlider.propTypes = {
   initialVisibleCards: PropTypes.number,
   imageWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   imageHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  onAddToDaftarSaya: PropTypes.func,
+  onRemoveFromDaftarSaya: PropTypes.func,
+  isDaftarSaya: PropTypes.bool,
 };
 
 export { Card, CardSlider };

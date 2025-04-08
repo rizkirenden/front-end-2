@@ -10,8 +10,8 @@ import cardImageHover2 from "../assets/Type=21.png";
 
 export const navItems = [
   { label: "Series", link: "#" },
-  { label: "Film", link: "#features" },
-  { label: "Daftar Saya", link: "#pricing" },
+  { label: "Film", link: "#" },
+  { label: "Daftar Saya", link: "/daftarsaya" },
 ];
 
 export const profileData = {
