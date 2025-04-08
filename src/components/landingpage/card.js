@@ -166,7 +166,6 @@ const Card = ({
               <h2 className={`font-bold text-xs sm:text-sm ${titleSize}`}>
                 {title}
               </h2>
-              {/* Tampilkan rating hanya untuk Continue Watching */}
               {isContinueWatching && (
                 <div className="flex items-center">
                   <FaStar className="text-white mr-1 text-xs sm:text-sm" />
@@ -229,6 +228,8 @@ const CardSlider = ({
   cardClassName = "",
   showArrows = true,
   showBadges = false,
+  imageWidth = "100%",
+  imageHeight = "100%",
   visibleCards = 5,
   isContinueWatching = false,
   initialVisibleCards = null,
@@ -386,14 +387,15 @@ const CardSlider = ({
                 marginRight: isContinueCard
                   ? isLastCard
                     ? "0"
-                    : "14px"
+                    : "11px"
                   : "6px",
-                transform: isContinueCard ? "translateX(-10px)" : "none",
+                transform: isContinueCard ? "translateX( 0px)" : "none",
               }}
             >
               <Card
                 {...card}
                 imageWidth={`${cardWidth}px`}
+                imageHeight={isContinueCard ? undefined : imageHeight}
                 newEpisode={showBadges ? card.newEpisode : false}
                 top10={showBadges ? card.top10 : false}
                 isContinueWatching={isContinueCard}
@@ -417,7 +419,7 @@ const CardSlider = ({
                 : "hover:scale-110"
             }`}
             style={{
-              left: "0px", // Diubah dari -20px menjadi 10px
+              left: "0px",
               transform: "translateY(-50%)",
               width: "40px",
               height: "40px",
@@ -437,7 +439,7 @@ const CardSlider = ({
                 : "hover:scale-110"
             }`}
             style={{
-              right: "0px", // Diubah dari -20px menjadi 10px
+              right: "0px",
               transform: "translateY(-50%)",
               width: "40px",
               height: "40px",
@@ -486,6 +488,8 @@ CardSlider.propTypes = {
   visibleCards: PropTypes.number,
   isContinueWatching: PropTypes.bool,
   initialVisibleCards: PropTypes.number,
+  imageWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  imageHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export { Card, CardSlider };

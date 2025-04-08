@@ -37,7 +37,6 @@ import img32 from "../assets/Type=30.png";
 import img33 from "../assets/Type=22.png";
 import img34 from "../assets/image 227.png";
 
-// Available images array
 const availableImages = [
   img1,
   img2,

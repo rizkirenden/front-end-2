@@ -18,9 +18,8 @@ const MovieAdmin = () => {
     genre: "",
     newEpisode: false,
     top10: false,
-    // Default styling properties
     imageWidth: "100%",
-    imageHeight: "140px",
+    imageHeight: "190px",
     bgColor: "bg-[#181A1C]",
     textColor: "text-white",
     titleSize: "text-lg",

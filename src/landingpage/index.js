@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "../components/landingpage/header";
 import { Nav } from "../components/landingpage/nav";
 import Profile from "../components/landingpage/profile";
@@ -7,18 +7,28 @@ import { CardSlider } from "../components/landingpage/card";
 import Footer from "../components/landingpage/footer";
 import hero from "../assets/herosection.png";
 import logoKecil from "../assets/logokecil.png";
-import {
-  navItems,
-  profileData,
-  cards,
-  topRatingCards,
-  topTrendingCard,
-  newReleaseCards,
-  footerData,
-} from "../data/movieData";
+import { navItems, profileData, cards, footerData } from "../data/movieData";
 
 function Index() {
   const [isMuted, setIsMuted] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [topRating, setTopRating] = useState([]);
+  const [trending, setTrending] = useState([]);
+  const [newRelease, setNewRelease] = useState([]);
+
+  useEffect(() => {
+    // Check admin status from localStorage
+    const adminStatus = localStorage.getItem("isAdmin") === "true";
+    setIsAdmin(adminStatus);
+
+    // Load movie data from localStorage
+    const savedMovies = JSON.parse(localStorage.getItem("movieData"));
+    if (savedMovies) {
+      setTopRating(savedMovies.topRating || []);
+      setTrending(savedMovies.trending || []);
+      setNewRelease(savedMovies.newRelease || []);
+    }
+  }, []);
 
   return (
     <div className="flex flex-col min-h-screen bg-[#181A1C]">
@@ -64,6 +74,7 @@ function Index() {
         bgExtended={true}
       />
 
+      {/* Continue Watching Section */}
       <section className="py-10 px-4 sm:px-8 md:px-16 lg:px-32 bg-[#181A1C]">
         <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-8 text-left">
           Melanjutkan Nonton Film
@@ -79,44 +90,78 @@ function Index() {
         </div>
       </section>
 
+      {/* Other Card Sections */}
       <section className="py-6 sm:py-10 px-4 sm:px-8 md:px-16 lg:px-32 bg-[#181A1C]">
-        <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 sm:mb-8 text-left">
-          Top Rating Film dan Series Hari Ini
-        </h2>
+        <div className="flex justify-between items-center mb-8">
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white">
+            Top Rating Film dan Series Hari Ini
+          </h2>
+          {isAdmin && (
+            <a
+              href="/admin/movies?tab=topRating"
+              className="text-blue-500 hover:underline text-sm"
+            >
+              Manage
+            </a>
+          )}
+        </div>
         <div className="w-full overflow-hidden">
           <CardSlider
-            cards={topRatingCards}
+            cards={topRating}
             cardClassName="max-w-[180px] sm:max-w-[280px]"
             showArrows={true}
             showBadges={true}
+            imageHeight="400px"
           />
         </div>
       </section>
 
       <section className="py-6 sm:py-10 px-4 sm:px-8 md:px-16 lg:px-32 bg-[#181A1C]">
-        <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 sm:mb-8 text-left">
-          Film Trending
-        </h2>
+        <div className="flex justify-between items-center mb-8">
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white">
+            Film Trending
+          </h2>
+          {isAdmin && (
+            <a
+              href="/admin/movies?tab=trending"
+              className="text-blue-500 hover:underline text-sm"
+            >
+              Manage
+            </a>
+          )}
+        </div>
         <div className="w-full overflow-hidden">
           <CardSlider
-            cards={topTrendingCard}
+            cards={trending}
             cardClassName="max-w-[180px] sm:max-w-[280px]"
             showArrows={true}
             showBadges={true}
+            imageHeight="400px"
           />
         </div>
       </section>
 
       <section className="py-6 sm:py-10 px-4 sm:px-8 md:px-16 lg:px-32 bg-[#181A1C]">
-        <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 sm:mb-8 text-left">
-          Rilis Baru
-        </h2>
+        <div className="flex justify-between items-center mb-8">
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white">
+            Rilis Baru
+          </h2>
+          {isAdmin && (
+            <a
+              href="/admin/movies?tab=newRelease"
+              className="text-blue-500 hover:underline text-sm"
+            >
+              Manage
+            </a>
+          )}
+        </div>
         <div className="w-full overflow-hidden">
           <CardSlider
-            cards={newReleaseCards}
+            cards={newRelease}
             cardClassName="max-w-[180px] sm:max-w-[280px]"
             showArrows={true}
             showBadges={true}
+            imageHeight="400px"
           />
         </div>
       </section>
