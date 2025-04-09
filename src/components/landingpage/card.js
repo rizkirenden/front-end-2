@@ -21,8 +21,6 @@ const CARD_STYLES = {
   progressFill: "h-full bg-[#0F8FF3] rounded-full",
   actionButton:
     "bg-white text-black rounded-full p-1 sm:p-2 hover:bg-opacity-90",
-  removeButton:
-    "bg-red-500 text-white rounded-full p-1 sm:p-2 hover:bg-opacity-90",
 };
 
 const Card = ({
@@ -74,7 +72,7 @@ const Card = ({
 
   const getTransformScale = () => {
     if (isContinueWatching) return 1.05;
-    return isMobile ? 1.15 : 1.1;
+    return isMobile ? 1.15 : 1.35;
   };
 
   const getTransformOrigin = () => {
@@ -88,7 +86,7 @@ const Card = ({
     const offsetPercentage = (scale - 1) * 50;
 
     if (position === "left") return `0 ${offsetPercentage}% 20px 0`;
-    if (position === "right") return `0 0 20px ${offsetPercentage}%`;
+    if (position === "right") return `0 0 20px ${offsetPercentage}% 20px 0`;
     return `0px ${offsetPercentage}% 10px ${offsetPercentage / 50}%`;
   };
 
@@ -173,6 +171,7 @@ const Card = ({
               <h2 className={`font-bold text-xs sm:text-sm ${titleSize}`}>
                 {title}
               </h2>
+              {/* Tampilkan rating hanya untuk Continue Watching */}
               {isContinueWatching && (
                 <div className="flex items-center">
                   <FaStar className="text-white mr-1 text-xs sm:text-sm" />
@@ -269,8 +268,6 @@ const CardSlider = ({
   isContinueWatching = false,
   initialVisibleCards = null,
   onAddToDaftarSaya,
-  onRemoveFromDaftarSaya,
-  isDaftarSaya = false,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [cardWidth, setCardWidth] = useState(0);
@@ -425,9 +422,9 @@ const CardSlider = ({
                 marginRight: isContinueCard
                   ? isLastCard
                     ? "0"
-                    : "11px"
+                    : "14px"
                   : "6px",
-                transform: isContinueCard ? "translateX( 0px)" : "none",
+                transform: isContinueCard ? "translateX(-10px)" : "none",
               }}
             >
               <Card
@@ -441,8 +438,6 @@ const CardSlider = ({
                   index === 0 ? "left" : isLastCard ? "right" : "middle"
                 }
                 onAddToDaftarSaya={onAddToDaftarSaya}
-                onRemoveFromDaftarSaya={onRemoveFromDaftarSaya}
-                isDaftarSaya={isDaftarSaya}
               />
             </div>
           );
@@ -536,9 +531,6 @@ CardSlider.propTypes = {
   imageWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   imageHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onAddToDaftarSaya: PropTypes.func,
-  onRemoveFromDaftarSaya: PropTypes.func,
-  isDaftarSaya: PropTypes.bool,
 };
-
 export { Card, CardSlider };
 export default Card;

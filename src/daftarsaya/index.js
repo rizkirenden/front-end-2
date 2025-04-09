@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Header from "../components/landingpage/header";
 import { Nav } from "../components/landingpage/nav";
 import Profile from "../components/landingpage/profile";
-import { CardSlider } from "../components/landingpage/card";
+import GridCard from "../components/daftarsaya/gridcard";
 import logoKecil from "../assets/logokecil.png";
 import Footer from "../components/landingpage/footer";
 import { navItems, profileData, footerData } from "../data/movieData";
@@ -50,15 +50,14 @@ const DaftarSaya = () => {
             Daftar Saya
           </h2>
           {daftarSaya.length > 0 ? (
-            <div className="w-full overflow-hidden">
-              <CardSlider
-                cards={daftarSaya}
-                showBadges={true}
-                initialVisibleCards={6}
-                isDaftarSaya={true}
-                onRemoveFromDaftarSaya={handleRemoveFromDaftarSaya}
-                imageHeight="300px"
-              />
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+              {daftarSaya.map((item) => (
+                <GridCard
+                  key={item.id}
+                  {...item}
+                  onRemoveFromDaftarSaya={handleRemoveFromDaftarSaya}
+                />
+              ))}
             </div>
           ) : (
             <p className="text-white text-center py-10">
