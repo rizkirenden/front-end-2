@@ -52,7 +52,6 @@ function Index() {
           ageRating: card.ageRating,
           duration: card.duration,
           genre: card.genre,
-          // Tambahkan properti lain yang diperlukan
         },
       ];
 

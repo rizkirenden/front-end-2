@@ -36,7 +36,6 @@ const GridCard = ({
           alt={alt}
           className="absolute inset-0 object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
         />
-
         {isHovered && (
           <div className="absolute inset-0 flex items-center justify-center">
             <button
@@ -63,14 +62,12 @@ const GridCard = ({
             <FaChevronDown className="text-xs sm:text-sm" />
           </button>
         </div>
-
         <div className="flex text-xs text-gray-300 gap-2 items-center mb-1">
           <span className={`font-bold ${CARD_STYLES.ageRating}`}>
             {ageRating}
           </span>
           {duration && <span>{duration}</span>}
         </div>
-
         <div className="text-xs text-[#C1C2C4] font-bold text-center">
           {genre}
         </div>
