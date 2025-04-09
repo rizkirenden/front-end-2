@@ -14,10 +14,8 @@ const CARD_STYLES = {
 };
 
 const GridCard = ({
-  title,
   image,
   alt,
-  rating,
   ageRating,
   duration,
   genre,
@@ -39,9 +37,6 @@ const GridCard = ({
           className="absolute inset-0 object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
         />
 
-        {/* Info dasar yang selalu tampil */}
-
-        {/* Overlay saat hover */}
         {isHovered && (
           <div className="absolute inset-0 flex items-center justify-center">
             <button
@@ -52,8 +47,6 @@ const GridCard = ({
           </div>
         )}
       </div>
-
-      {/* Panel bawah yang muncul saat hover */}
       <div
         className={`${CARD_STYLES.hoverPanel} ${
           isHovered ? "opacity-100" : "opacity-0 h-0 overflow-hidden"

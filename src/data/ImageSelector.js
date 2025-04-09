@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { FaImage } from "react-icons/fa";
-
-// Import images directly
 import img1 from "../assets/Type=22.png";
 import img2 from "../assets/Type=11.png";
 import img3 from "../assets/Type=21.png";
